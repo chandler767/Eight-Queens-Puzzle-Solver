@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	if (len(os.Args) < 3) {
+	if (len(os.Args) < 3) { // The user did not specify the arguments. 
 		fmt.Println("Missing required arguments. Please specify the row and column numbers.")
 		fmt.Println("Press 'Enter' to continue...")
 		bufio.NewReader(os.Stdin).ReadBytes('\n') 
@@ -24,24 +24,23 @@ func main() {
 	column_s := os.Args[1]
 	row_s := os.Args[2]
 	fmt.Println("VVVVVVVVVVVVVVVVVVVVVVVVVV\nEight Queens Puzzle Solver\n^^^^^^^^^^^^^^^^^^^^^^^^^^")
-	row, err := strconv.Atoi(row_s)
+	row, err := strconv.Atoi(row_s) // Convert to int.
     if err != nil {
         fmt.Println(err)
         os.Exit(2)
     }
-    column, err := strconv.Atoi(column_s)
+    column, err := strconv.Atoi(column_s)  // Convert to int.
     if err != nil {
         fmt.Println(err)
         os.Exit(2)
     }
-    if (column > 8 || column < 1 || row > 8 || row < 1) {
+    if (column > 8 || column < 1 || row > 8 || row < 1) { // Does the point land on an 8*8 grid?
     	fmt.Println("Value outside expected range. Please enter a value 1-8.")
     	os.Exit(2)
     }
-	fmt.Println("\nResult:\n")
 	var qfield [9]int
 	qfield[column] = row
-	for i := (column-1); i > 0; i-- {
+	for i := (column-1); i > 0; i-- { // Other points that work as a solution can be determined from the row passed as an argument.
 		move := 0
 		if (qfield[i+1] == 1) {
 			move = -7
@@ -83,7 +82,7 @@ func main() {
 		} 
 		qfield[i] = (qfield[i-1] + move)
 	}
-	if ((qfield[1] == 1 || qfield[1] == 8) && (qfield[1] == 1 || qfield[1] == 8)) {
+	if ((qfield[1] == 1 || qfield[1] == 8) && (qfield[1] == 1 || qfield[1] == 8)) { // The first solution didn't work so it runs again backwards for the result. 
 		for i := (column-1); i > 0; i-- {
 			move := 0
 			if (qfield[i+1] == 1) {
@@ -127,11 +126,12 @@ func main() {
 			qfield[i] = (qfield[i-1] - move)
 		}
 	}
-	for i := 1; i < 9; i++ {
+	fmt.Println("\nResult:\n")
+	for i := 1; i < 9; i++ { // Print out the column and row info. 
 		fmt.Println(fmt.Sprintf("Column: %d, Row: %d", i, qfield[i]))
 	}
 	fmt.Println("")
-	for i := 1; i < 9; i++ {
+	for i := 1; i < 9; i++ { // Print out an 8*8 grid with the solution. 
 		for u := 1; u < 9; u++ {
 			if (qfield[u] == i) {
 				fmt.Print("■")
@@ -141,6 +141,6 @@ func main() {
 		}
 		fmt.Println("")
 	}
-	os.Exit(0) 
+	os.Exit(0) // Done.
 }
 
