@@ -1,5 +1,5 @@
 # Eight Queens Puzzle Solver
-This application finds a solution to the [Eight Queens Puzzle](https://en.wikipedia.org/wiki/Eight_queens_puzzle). 
+This application finds a solution to the [Eight Queens Puzzle](https://en.wikipedia.org/wiki/Eight_queens_puzzle). It won't work in all situations.
 
 # Instructions
 - To build: Install golang and then run the makefile.
